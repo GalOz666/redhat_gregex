@@ -4,7 +4,7 @@ from abc import ABC, abstractmethod
 import re
 from typing import Iterable, List
 
-GREEN_COLOR = '\033[91m'
+RED_COLOR = '\033[91m'
 END_STYLE = '\033[0m'
 
 
@@ -15,7 +15,7 @@ class BaseMatcherMeta(ABC):
             match_str_list = list(match[0].string)
             match_start_ends = [(m.start(), m.end()) for m in match]
             for start, end in match_start_ends:
-                match_str_list[start:start] = GREEN_COLOR
+                match_str_list[start:start] = RED_COLOR
                 match_str_list[end:end] = END_STYLE
             print("".join(match_str_list))
 
