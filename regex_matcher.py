@@ -33,7 +33,7 @@ def main():
     elif args.color:
         [m.print_color() for m in matchers]
     elif args.machine:
-        [m.print_machine(file=m.file) for m in matchers]
+        [m.print_machine() for m in matchers]
     else:
         [m.print_normal() for m in matchers]
 

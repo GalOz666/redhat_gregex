@@ -25,10 +25,10 @@ class BaseMatcherMeta(ABC):
                 match_str_list[end:end] = END_STYLE
             print("".join(match_str_list))
 
-    def print_machine(self, file: str):
+    def print_machine(self):
         for line_num, match in self.line_dict.items():
             for m in match:
-                print(f'{file}:{line_num}:{m.start()}:{m.string[m.start():m.end()]}')
+                print(f'{self.file}:{line_num}:{m.start()}:{m.string[m.start():m.end()]}')
 
     def print_with_caret(self):
         for match in self.line_dict.values():
@@ -40,14 +40,19 @@ class BaseMatcherMeta(ABC):
             print("".join(caret_line))
             print('\n')
 
-    def print_normal(self, file):
+    def print_normal(self):
         for line_num, match in self.line_dict.items():
             m = match[0]
-            print(f'{file} {line_num} {m.string}')
+            print(f'{self.file} {line_num} {m.string}')
 
     @property
     @abstractmethod
     def line_dict(self) -> {int: List[re.Match]}:
+        pass
+
+    @property
+    @abstractmethod
+    def file(self) -> str:
         pass
 
 
@@ -56,7 +61,10 @@ class StringMatcher(BaseMatcherMeta):
     def __init__(self, string: str, regex: str):
         self.string = string
         self.regex = regex
-        self.file = "STDIN"
+
+    @property
+    def file(self):
+        return 'STDIN'
 
     @property
     def line_dict(self):
@@ -72,7 +80,7 @@ class FileMatcher(BaseMatcherMeta):
 
     def __init__(self, file: str, regex: str):
         if os.path.isfile(file):
-            self.file = file
+            self._file = file
         else:
             raise FileNotFoundError(f"Cannot find file {file}")
         self.regex = regex
@@ -86,3 +94,7 @@ class FileMatcher(BaseMatcherMeta):
                 if len(result):
                     l_dict[idx+1] = result
         return l_dict
+
+    @property
+    def file(self):
+        return self._file
