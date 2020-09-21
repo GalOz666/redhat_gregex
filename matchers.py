@@ -1,6 +1,7 @@
 import os
 from abc import ABC, abstractmethod
 import re
+from typing import Iterable
 
 GREEN_COLOR = '\033[92m'
 END_STYLE = '\x1b[0m'
@@ -18,7 +19,7 @@ class BaseMatcherMeta(ABC):
                 match_str_list[end:end] = END_STYLE
             print(str(match_str_list))
 
-    def print_verbose_path(self, file):
+    def print_machine(self, file: str):
         for line_num, match in self.line_dict.items():
             for m in match:
                 print(f'{file}:{line_num}:{m.string[m.start():m.end()]}')
@@ -37,13 +38,13 @@ class BaseMatcherMeta(ABC):
 
     @property
     @abstractmethod
-    def line_dict(self) -> dict:
+    def line_dict(self) -> {int: Iterable[re.Match]}:
         pass
 
 
 class StringMatcher(BaseMatcherMeta):
 
-    def __init__(self, string: str, regex):
+    def __init__(self, string: str, regex: str):
         self.string = string
         self.regex = regex
         self.file = "STDIN"
@@ -76,4 +77,3 @@ class FileMatcher(BaseMatcherMeta):
                 if len(list(result)):
                     l_dict[idx] = result
         return l_dict
-

@@ -22,8 +22,19 @@ def main():
         print("please provide a regex pattern!")
 
     if args.files:
-        matchers = [FileMatcher(file) for file in args.files.split()]
+        matchers = [FileMatcher(file, args.regex) for file in args.files.split()]
     else:
-        matchers = StringMatcher(sys.argv[-1])
+        matchers = StringMatcher(sys.argv[-1], args.regex)
+
+    if args.underline:
+        [m.print_with_caret() for m in matchers]
+    elif args.color:
+        [m.print_color() for m in matchers]
+    elif args.machine:
+        [m.print_machine(file=m.file) for m in matchers]
+    else:
+        [m.print_normal() for m in matchers]
 
 
+if __name__ == "__main__":
+    main()
