@@ -3,10 +3,6 @@ import sys
 from matchers import StringMatcher, FileMatcher
 import argparse
 
-GREEN_COLOR = '\033[92m'
-END_STYLE = '\x1b[0m'
-
-
 parser = argparse.ArgumentParser()
 
 parser.add_argument('-r', '--regex', help="regex expression for searching")
