@@ -34,7 +34,8 @@ class BaseMatcherMeta(ABC):
             print(str(caret_line))
 
     def print_normal(self):
-        print(*[next(x).string for x in self.line_dict.values()], sep='\n')
+        for line_match in self.line_dict.values:
+            print(list(line_match)[0].string)
 
     @property
     @abstractmethod
