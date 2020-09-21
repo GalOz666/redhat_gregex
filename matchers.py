@@ -1,3 +1,4 @@
+import copy
 import os
 from abc import ABC, abstractmethod
 import re
@@ -26,16 +27,18 @@ class BaseMatcherMeta(ABC):
 
     def print_with_caret(self):
         for match in self.line_dict.values():
-            line = list(match)[0].string
+            line = ''
             caret_line = list(" "*len(line))
             for m in match:
                 caret_line[m.start():m.start()+1] = "^"
+                line = m.string
             print(line)
             print(str(caret_line))
 
     def print_normal(self):
         for line_match in self.line_dict.values():
-            print([x.string for x in line_match][0])
+            matches = list(line_match)
+            print(matches[0].string)
 
     @property
     @abstractmethod
@@ -55,7 +58,8 @@ class StringMatcher(BaseMatcherMeta):
         l_dict = dict()
         for idx, line in enumerate(self.string.split('\n')):
             result = re.finditer(self.regex, line)
-            if len(list(result)):
+            check = copy.deepcopy(result)
+            if len(list(check)):
                 l_dict[idx] = result
         return l_dict
 
@@ -75,6 +79,7 @@ class FileMatcher(BaseMatcherMeta):
         with open(self.file) as f:
             for idx, line in enumerate(f):
                 result = re.finditer(self.regex, line)
-                if len(list(result)):
+                check = copy.deepcopy(result)
+                if len(list(check)):
                     l_dict[idx+1] = result
         return l_dict
