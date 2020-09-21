@@ -28,7 +28,7 @@ class BaseMatcherMeta(ABC):
     def print_machine(self, file: str):
         for line_num, match in self.line_dict.items():
             for m in match:
-                print(f'{file}:{line_num}:{m.string[m.start():m.end()]}')
+                print(f'{file}:{line_num}:{m.start()}:{m.string[m.start():m.end()]}')
 
     def print_with_caret(self):
         for match in self.line_dict.values():
@@ -40,9 +40,10 @@ class BaseMatcherMeta(ABC):
             print("".join(caret_line))
             print('\n')
 
-    def print_normal(self):
-        for line_match in self.line_dict.values():
-            print(line_match[0].string)
+    def print_normal(self, file):
+        for line_num, match in self.line_dict.items():
+            m = match[0]
+            print(f'{file}:{line_num}:{m.string}')
 
     @property
     @abstractmethod
