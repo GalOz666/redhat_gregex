@@ -34,8 +34,8 @@ class BaseMatcherMeta(ABC):
             print(str(caret_line))
 
     def print_normal(self):
-        for line_match in self.line_dict.values:
-            print(list(line_match)[0].string)
+        for line_match in self.line_dict.values():
+            print([x.string for x in line_match][0])
 
     @property
     @abstractmethod
@@ -76,5 +76,5 @@ class FileMatcher(BaseMatcherMeta):
             for idx, line in enumerate(f):
                 result = re.finditer(self.regex, line)
                 if len(list(result)):
-                    l_dict[idx] = result
+                    l_dict[idx+1] = result
         return l_dict
