@@ -8,18 +8,22 @@ b = StringMatcher('Ut enim ad minim veniam, \n'
 
 
 def test_normal():
-    b = a.line_dict
-    assert len(b) == 3
+    c = a.line_dict
+    assert len(c) == 3
     a.print_normal()
+    b.print_normal()
 
 
 def test_file_color():
     a.print_color()
+    b.print_color()
 
 
 def test_carret():
     a.print_with_caret()
+    b.print_with_caret()
 
 
 def test_machine():
-    a.print_machine(file=file)
+    a.print_machine(file=a.file)
+    b.print_machine(file=b.file)
