@@ -7,6 +7,12 @@ from typing import Iterable, List
 RED_COLOR = '\033[91m'
 END_STYLE = '\033[0m'
 
+# I am implementing an abstract class for either File or String operations.
+# I'm using ABCs as these give us more rigid enforcing of our concrete class structures.
+# They will share most printing options as they will both organize their results in 'line_dict' type.
+# The main difference is how to get this dictionary, which will be left to each concrete class.
+# These classes will then be used in the main module and each function will match a different argument from the shell
+
 
 class BaseMatcherMeta(ABC):
 
