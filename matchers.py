@@ -43,7 +43,7 @@ class BaseMatcherMeta(ABC):
     def print_normal(self, file):
         for line_num, match in self.line_dict.items():
             m = match[0]
-            print(f'{file}:{line_num}:{m.string}')
+            print(f'{file} {line_num} {m.string}')
 
     @property
     @abstractmethod
