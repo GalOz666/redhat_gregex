@@ -6,7 +6,9 @@ import argparse
 parser = argparse.ArgumentParser()
 
 parser.add_argument('-r', '--regex', help="regex expression for searching")
-parser.add_argument('-f', '--files', nargs="+", help="list of files to search in")
+parser.add_argument('-f', '--files', nargs="+", help="list of files to search in. If not used simply provide "
+                                                     "a string surrounded by quotation marks as the final "
+                                                     "argument to the script")
 
 # mutually exclusive:
 parser.add_argument('-u', '--underline', help="print matches with '^' underneath them")
