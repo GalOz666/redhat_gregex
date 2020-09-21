@@ -4,8 +4,8 @@ from abc import ABC, abstractmethod
 import re
 from typing import Iterable, List
 
-GREEN_COLOR = '\x1b[6;30;42m'
-END_STYLE = '\x1b[0m'
+GREEN_COLOR = '\033[91m'
+END_STYLE = '\033[0m'
 
 
 class BaseMatcherMeta(ABC):
