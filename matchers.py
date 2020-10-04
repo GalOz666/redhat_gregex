@@ -23,7 +23,7 @@ class BaseMatcherMeta(ABC):
             for start, end in match_start_ends:
                 match_str_list[start:start] = RED_COLOR
                 match_str_list[end:end] = END_STYLE
-            print("".join(match_str_list))
+            print("".join(match_str_list), end='')
 
     def print_machine(self):
         for line_num, match in self.line_dict.items():
@@ -38,7 +38,6 @@ class BaseMatcherMeta(ABC):
                 caret_line[m.start():m.start()+1] = "^"
             print(line)
             print("".join(caret_line))
-            print('\n')
 
     def print_normal(self):
         for line_num, match in self.line_dict.items():
