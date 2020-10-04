@@ -11,10 +11,11 @@ parser.add_argument('-f', '--files', nargs="+", help="list of files to search in
                                                      "argument to the script")
 
 # mutually exclusive:
-parser.add_argument('-u', '--underline', help="print matches with '^' underneath them")
-parser.add_argument('-c', '--color', help="print colored matches")
-parser.add_argument('-m', '--machine', help="print matches with 'print the output in the format:"
-                                            "\n'file_name:line_number:start_position:matched_text'")
+parser.add_argument('-u', '--underline', action='store_true', help="print matches with '^' underneath them")
+parser.add_argument('-c', '--color', action='store_true', help="print colored matches")
+parser.add_argument('-m', '--machine', action='store_true',
+                    help="print matches with 'print the output in the format:"
+                         " \n'file_name:line_number:start_position:matched_text'")
 
 args, _ = parser.parse_known_args()
 

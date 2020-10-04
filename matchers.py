@@ -2,7 +2,7 @@ import copy
 import os
 from abc import ABC, abstractmethod
 import re
-from typing import Iterable, List
+from typing import List
 
 RED_COLOR = '\033[91m'
 END_STYLE = '\033[0m'
@@ -43,7 +43,7 @@ class BaseMatcherMeta(ABC):
     def print_normal(self):
         for line_num, match in self.line_dict.items():
             m = match[0]
-            print(f'{self.file} {line_num} {m.string}')
+            print(f'{self.file} {line_num} {m.string}', end='')
 
     @property
     @abstractmethod
