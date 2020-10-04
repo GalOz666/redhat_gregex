@@ -10,12 +10,14 @@ parser.add_argument('-f', '--files', nargs="+", help="list of files to search in
                                                      "a string surrounded by quotation marks as the final "
                                                      "argument to the script")
 
+
+group = parser.add_mutually_exclusive_group()
 # mutually exclusive:
-parser.add_argument('-u', '--underline', action='store_true', help="print matches with '^' underneath them")
-parser.add_argument('-c', '--color', action='store_true', help="print colored matches")
-parser.add_argument('-m', '--machine', action='store_true',
-                    help="print matches with 'print the output in the format:"
-                         " \n'file_name:line_number:start_position:matched_text'")
+group.add_argument('-u', '--underline', action='store_true', help="print matches with '^' underneath them")
+group.add_argument('-c', '--color', action='store_true', help="print colored matches")
+group.add_argument('-m', '--machine', action='store_true',
+                   help="print matches with 'print the output in the format:"
+                   " \n'file_name:line_number:start_position:matched_text'")
 
 args, _ = parser.parse_known_args()
 
